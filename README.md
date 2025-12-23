@@ -12,16 +12,16 @@ Send a prompt to a local Ollama model.
 Accepts optional STDIN (code, diffs, files) which is appended after the instruction.
 
 ```console
-$ ollama_run_prompt
+$ ollama_run_prompt 
 
-Usage:
-  ollama_run_prompt "instruction text" [model]
-  cat <input_file> | ollama_run_prompt "instruction text" [model]
+Usage: ollama_run_prompt "instruction text" [model]
+       cat <input_file> | ollama_run_prompt "instruction text" [model]
 
 Examples:
-  ollama_run_prompt "Explain the Turing Test" deepseek-r1:8b
+  ollama_run_prompt "Explain the Turing Test" "deepseek-r1:8b"
   cat example.py | ollama_run_prompt "Find vulnerabilities in this code"
   git --no-pager diff --cached | ollama_run_prompt "Generate short commit message"
+  MY_OLLAMA_SAVE_DATASET=0 ollama_run_prompt "ping"
 ```
 
 #### `ollama_save_dataset`
