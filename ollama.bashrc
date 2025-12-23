@@ -10,7 +10,7 @@ ollama_run_prompt ()
     };
 
     local instruction="$1"
-    local model="${2:-${1:-qwen2.5-coder:7b}}" # use 1st arg if 2nd missing or use qwen2.5-coder:7b as defualt model if both missing
+    local model="${2:-qwen2.5-coder:7b}" # use `qwen2.5-coder:7b` as defualt model if $2 is empty
     local keep_alive=0 # close immediately once prompt complete
 
     jq -n \
