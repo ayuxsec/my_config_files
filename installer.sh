@@ -6,6 +6,6 @@ mkdir -p "$HOME/.config/my_config_files"
 
 curl -s -o "~/.config/conky/conky.conf" "${base_url}/conky.conf"
 curl -s -o "~/.config/my_config_files/ollama.bashrc" "${base_url}/ollama.bashrc" && \
-  echo "source ~/.config/my_config_files/ollama.bashrc" >> "$HOME/.bashrc"
+  printf "\n# source My config files\nsource ~/.config/my_config_files/ollama.bashrc\n" >> "$HOME/.bashrc"
 
 echo "[+] restart your shell."
