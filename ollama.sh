@@ -1,9 +1,8 @@
 base_url="http://localhost:11434/api/generate"
 base_header="Content-Type: application/json"
 
-# example: echo "Explain Turing Test." | ollama_run_prompt "deepseek-r1:8b" | glow .
 ollama_run_prompt() {
-  [[ "$1" == "help" ]] && {
+  [[ "$1" == "help" || -z "$1" ]] && {
     printf '\nUsage: ollama_run_prompt "instruction text" [model]'
     printf '\n       cat <input_file> | ollama_run_prompt "instruction text" [model]'
     printf '\n\nExamples:'
