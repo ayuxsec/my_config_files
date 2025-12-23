@@ -2,7 +2,7 @@ base_url="http://localhost:11434/api/generate"
 base_header="Content-Type: application/json"
 
 ollama_run_prompt() {
-  [[ "$1" == "help" || -z "$1" ]] && {
+  [[ "$1" == "help" || ( -z "$1" && -t 0 ) ]] && {
     printf '\nUsage: ollama_run_prompt "instruction text" [model]'
     printf '\n       cat <input_file> | ollama_run_prompt "instruction text" [model]'
     printf '\n\nExamples:'
