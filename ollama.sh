@@ -3,11 +3,13 @@ base_header="Content-Type: application/json"
 
 # example: echo "Explain Turing Test." | ollama_run_prompt "deepseek-r1:8b" | glow .
 ollama_run_prompt() {
-  [[ "$1" == "help" || -t 0 ]] && {
-    printf '\nUsage: cat <input_file> | ollama_run_prompt "instruction text" [model]'
-    printf '\nExamples:'
-    printf '\n  cat example.py | ollama_run_prompt "find vulnerabilities in my code"'
-    printf '\n  git --no-pager diff --cached | ollama_run_prompt "generate short commit message"\n\n'
+  [[ "$1" == "help" ]] && {
+    printf '\nUsage: ollama_run_prompt "instruction text" [model]'
+    printf '\n       cat <input_file> | ollama_run_prompt "instruction text" [model]'
+    printf '\n\nExamples:'
+    printf '\n  ollama_run_prompt "Explain the Turing Test" "deepseek-r1:8b"'
+    printf '\n  cat example.py | ollama_run_prompt "Find vulnerabilities in this code"'
+    printf '\n  git --no-pager diff --cached | ollama_run_prompt "Generate short commit message"\n\n'
     return 0
   }
 
@@ -15,8 +17,8 @@ ollama_run_prompt() {
   local model="${2:-"qwen2.5-coder:7b"}"
   local keep_alive=0
 
-  local stdin_content
-  stdin_content="$(cat)"
+  local stdin_content=""
+  [ ! -t 0 ] && stdin_content="$(cat)"
 
   local full_prompt="${instruction:+${instruction}$'\n\n'}${stdin_content}"
 
