@@ -2,7 +2,7 @@
 
 ## ollama.sh
 
-Minimal Bash helpers I use for interacting with [Ollama](https://ollama.com/) and logging prompt/response pairs for later fine-tuning or analysis.
+Minimal Bash helpers I use for interacting with [Ollama](https://ollama.com/) local APIs and logging prompt/response pairs for later fine-tuning or analysis.
 
 ### Functions
 
