@@ -6,8 +6,12 @@ is_empty_or_not_set_var() {
     [ -z "$1" ]
 }
 
+print_key_not_present() {
+  echo "[-] GROQ_API_KEY is not set. Please generate a free API key from https://console.groq.com/keys and export it."
+}
+
 groq_run_prompt() {
-    is_empty_or_not_set_var "${GROQ_API_KEY}" && { echo "[-] GROQ_API_KEY env variable in empty or not set exiting"; return 78; }
+    is_empty_or_not_set_var "${GROQ_API_KEY}" && { print_key_not_present; return 78; }
     local base_url="https://api.groq.com/openai/v1/chat/completions"
     [[ $1 == "help" || ( -z "$1" && -t 0 ) ]] && {
         printf '\nUsage: groq_run_prompt "instruction text" [model]'
@@ -58,7 +62,7 @@ groq_run_prompt() {
 }
 
 groq_list_models() {
-    is_empty_or_not_set_var "${GROQ_API_KEY}" && { echo "GROQ_API_KEY env variable in empty or not set exiting"; return 78; }
+    is_empty_or_not_set_var "${GROQ_API_KEY}" && { print_key_not_present; return 78; }
     curl -s "https://api.groq.com/openai/v1/models" -H "${authorization_header}" -H "${base_header}" | jq .
 }
 
