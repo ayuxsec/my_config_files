@@ -47,7 +47,7 @@ groq_run_prompt() {
        }' | curl -s "$base_url" -H "$base_header" -H "$authorization_header" -d @- | \
        jq -r '.choices[0].message.content'
     )
-    echo $response
+    printf '%s\n' "$response"
 
     # Append training record for future fine-tunning related task
     [[ "$MY_GROQ_SAVE_DATASET" == "0" ]] && { echo "[-] skipping save (set MY_GROQ_SAVE_DATASET=1 to enable)"; return 0; }
