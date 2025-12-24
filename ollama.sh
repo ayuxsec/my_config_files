@@ -72,5 +72,5 @@ ollama_save_dataset() {
             timestamp: $timestamp
           }' >> "$dataset"
 
-  echo "[+] Saved to $dataset"
+  echo "[+] Saved to $dataset" >&2
 }
