@@ -1,6 +1,6 @@
 #!/bin/bash
+set -e # catch errors
 base_header="Content-Type: application/json"
-authorization_header="Authorization: Bearer ${GROQ_API_KEY}" 
 
 is_empty_or_not_set_var() {
     [ -z "$1" ]
@@ -11,7 +11,10 @@ print_key_not_present() {
 }
 
 groq_run_prompt() {
+    set +e
     is_empty_or_not_set_var "${GROQ_API_KEY}" && { print_key_not_present; return 78; }
+    set -e
+    local authorization_header="Authorization: Bearer ${GROQ_API_KEY}" 
     local base_url="https://api.groq.com/openai/v1/chat/completions"
     [[ $1 == "help" || ( -z "$1" && -t 0 ) ]] && {
         printf '\nUsage: groq_run_prompt "instruction text" [model]'
@@ -62,8 +65,10 @@ groq_run_prompt() {
 }
 
 groq_list_models() {
-    is_empty_or_not_set_var "${GROQ_API_KEY}" && { print_key_not_present; return 78; }
-    curl -s "https://api.groq.com/openai/v1/models" -H "${authorization_header}" -H "${base_header}" | jq .
+  set +e
+  is_empty_or_not_set_var "${GROQ_API_KEY}" && { print_key_not_present; return 78; }
+  set -e
+  curl -s "https://api.groq.com/openai/v1/models" -H "${authorization_header}" -H "${base_header}" | jq .
 }
 
 groq_save_dataset() {
