@@ -18,10 +18,9 @@ ollama_run_prompt() {
   local model="${2:-"qwen2.5-coder:7b"}"
   local keep_alive=0
 
-  local stdin_content=""
-  [ ! -t 0 ] && stdin_content="$(cat)"
+  [ ! -t 0 ] && local stdin_content="$(cat)"
 
-  local full_prompt="${instruction:+${instruction}$'\n\n'}${stdin_content}"
+  local full_prompt="${instruction}${instruction:+"${stdin_content:+$'\n\n'}"}${stdin_content}"
 
   local response
   response="$(
