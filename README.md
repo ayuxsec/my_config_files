@@ -4,7 +4,7 @@
 
 ```console
 git clone --depth 1 https://github.com/ayuxsec/my_config_files
-echo "for f in /<path_to_directory>/my_config_files/*.sh; do [ -f "$f" ] && source "$f"; done" > ~/.bashrc
+echo "for f in /<path_to_directory>/my_config_files/*.sh; do [ -f "$f" ] && source "$f"; done" >> ~/.bashrc
 ```
 
 ## ollama.sh
