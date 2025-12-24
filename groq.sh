@@ -7,7 +7,7 @@ is_empty_or_not_set_var() {
 }
 
 print_key_not_present() {
-  echo "[-] GROQ_API_KEY is not set. Please generate a free API key from https://console.groq.com/keys and export it."
+  echo "[-] GROQ_API_KEY is not set. Please generate a free API key from https://console.groq.com/keys and export it." >& 2
 }
 
 groq_run_prompt() {
