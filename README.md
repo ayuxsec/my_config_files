@@ -39,7 +39,7 @@ Usage: ollama_save_dataset <model> <full_prompt> <response> <user_score>
 ~/ollama_datasets/instruction_logs.jsonl
 ```
 
-### External API → dataset logging
+### External API dataset logging
 
 Useful when the response does **not** come from Ollama but should still be logged.
 
