@@ -30,7 +30,6 @@ Append a training record to a local JSONL dataset, intended for future fine-tuni
 
 ```console
 $ ollama_save_dataset
-
 Usage: ollama_save_dataset <model> <full_prompt> <response> <user_score>
 ```
 
