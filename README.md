@@ -1,5 +1,12 @@
 # my_config_files
 
+## Install
+
+```console
+git clone --depth 1 https://github.com/ayuxsec/my_config_files
+echo "for f in /<path_to_directory>/my_config_files/*.sh; do [ -f "$f" ] && source "$f"; done" > ~/.bashrc
+```
+
 ## ollama.sh
 
 Minimal Bash helpers I use for interacting with [Ollama](https://ollama.com/) local APIs and logging prompt/response pairs for later fine-tuning or analysis.
