@@ -68,6 +68,7 @@ groq_list_models() {
   set +e
   is_empty_or_not_set_var "${GROQ_API_KEY}" && { print_key_not_present; return 78; }
   set -e
+  local authorization_header="Authorization: Bearer ${GROQ_API_KEY}" 
   curl -s "https://api.groq.com/openai/v1/models" -H "${authorization_header}" -H "${base_header}" | jq .
 }
 
