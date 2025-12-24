@@ -4,6 +4,12 @@
 
 Minimal Bash helpers I use for interacting with [Ollama](https://ollama.com/) local APIs and logging prompt/response pairs for later fine-tuning or analysis.
 
+### Install
+
+```bash
+source <(curl -fsSL "https://raw.githubusercontent.com/ayuxsec/my_config_files/refs/heads/main/ollama.sh")
+```
+
 ### Functions
 
 #### `ollama_run_prompt`
