@@ -40,7 +40,7 @@ ollama_run_prompt() {
   )"
 
   # Print response
-  echo "$response" | glow . # todo: hardcoding glow for now. see https://snapcraft.io/glow to install glow
+  echo "$response" | { has glow && glow .; } || cat # https://snapcraft.io/glow
 
   # Append training record for future fine-tunning related task
   [[ "$MY_OLLAMA_SAVE_DATASET" == "0" ]] && { echo "[-] skipping save (set MY_OLLAMA_SAVE_DATASET=1 to enable)"; return 0; }
@@ -75,3 +75,5 @@ ollama_save_dataset() {
 
   echo "[+] Saved to $dataset" >&2
 }
+
+has() { command -v "$1" >/dev/null; }
