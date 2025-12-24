@@ -1,3 +1,4 @@
+#!/bin/bash
 base_url="http://localhost:11434/api/generate"
 base_header="Content-Type: application/json"
 
