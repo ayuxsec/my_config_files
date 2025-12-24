@@ -42,10 +42,10 @@ groq_run_prompt() {
          "max_completion_tokens": 8192,
          "top_p": 1,
          "stream": false,
-         "reasoning_effort": "medium",
+         # "reasoning_effort": "medium", not supported by all models
          "stop": null
-       }' | curl -s "$base_url" -H "$base_header" -H "$authorization_header" -d @- | \
-       jq -r '.choices[0].message.content'
+       }' | curl -s "$base_url" -H "$base_header" -H "$authorization_header" -d @- \
+          | jq -r '.choices[0].message.content'
     )
     printf '%s\n' "$response"
 
