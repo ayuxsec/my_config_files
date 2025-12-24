@@ -1,9 +1,14 @@
 #!/bin/bash
-base_url="https://api.groq.com/openai/v1/chat/completions"
 base_header="Content-Type: application/json"
 authorization_header="Authorization: Bearer ${GROQ_API_KEY}" 
 
+is_empty_or_not_set_var() {
+    [ -z "$1" ]
+}
+
 groq_run_prompt() {
+    is_empty_or_not_set_var "${GROQ_API_KEY}" && { echo "[-] GROQ_API_KEY env variable in empty or not set exiting"; return 78; }
+    local base_url="https://api.groq.com/openai/v1/chat/completions"
     [[ $1 == "help" || ( -z "$1" && -t 0 ) ]] && {
         printf '\nUsage: groq_run_prompt "instruction text" [model]'
         printf '\n       cat <input_file> | groq_run_prompt "instruction text" [model]'
@@ -11,7 +16,7 @@ groq_run_prompt() {
         printf '\n  groq_run_prompt "Explain the Turing Test" "llama-3.3-70b-versatile"'
         printf '\n  cat example.py | groq_run_prompt "Find vulnerabilities in this code"'
         printf '\n  git --no-pager diff --cached | groq_run_prompt "Generate short commit message"'
-        printf '\n  MY_groq_SAVE_DATASET=0 groq_run_prompt "ping"\n\n'
+        printf '\n  MY_GROQ_SAVE_DATASET=0 GROQ_API_KEY="gsk_xxx" groq_run_prompt "ping"\n\n'
     return 0
     }
     local instruction="$1"
@@ -53,6 +58,7 @@ groq_run_prompt() {
 }
 
 groq_list_models() {
+    is_empty_or_not_set_var "${GROQ_API_KEY}" && { echo "GROQ_API_KEY env variable in empty or not set exiting"; return 78; }
     curl -s "https://api.groq.com/openai/v1/models" -H "${authorization_header}" -H "${base_header}" | jq .
 }
 
