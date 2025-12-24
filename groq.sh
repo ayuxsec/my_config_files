@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e # catch errors
 base_header="Content-Type: application/json"
 
 is_empty_or_not_set_var() {
