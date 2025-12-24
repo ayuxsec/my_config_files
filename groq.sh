@@ -8,7 +8,7 @@ groq_run_prompt() {
         printf '\nUsage: groq_run_prompt "instruction text" [model]'
         printf '\n       cat <input_file> | groq_run_prompt "instruction text" [model]'
         printf '\n\nExamples:'
-        printf '\n  groq_run_prompt "Explain the Turing Test" "deepseek-r1:8b"'
+        printf '\n  groq_run_prompt "Explain the Turing Test" "llama-3.3-70b-versatile"'
         printf '\n  cat example.py | groq_run_prompt "Find vulnerabilities in this code"'
         printf '\n  git --no-pager diff --cached | groq_run_prompt "Generate short commit message"'
         printf '\n  MY_groq_SAVE_DATASET=0 groq_run_prompt "ping"\n\n'
@@ -50,6 +50,10 @@ groq_run_prompt() {
 
     read -p "Enter score for model response (1/10): " score < /dev/tty && \
     groq_save_dataset "${model}" "${full_prompt}" "${response}" "${score}"
+}
+
+groq_list_models() {
+    curl -s "https://api.groq.com/openai/v1/models" -H "${authorization_header}" -H "${base_header}" | jq .
 }
 
 groq_save_dataset() {
